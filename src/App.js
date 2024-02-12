@@ -37,7 +37,7 @@ function App() {
 	return (
 		<div className=' h-screen w-full flex justify-center items-center p-6'>
 			<Card className=' w-fit mx-auto p-4'>
-		 <Typography variant="h4" color="blue-gray">
+		 <Typography variant="h4" color="blue">
 		   Login
 		 </Typography>
 		 <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
@@ -70,7 +70,7 @@ function App() {
 			 />
 		   </div>
 		   
-		   <Button className="mt-6" fullWidth onClick={handlesubmit}>
+		   <Button color='blue' className="mt-6" fullWidth onClick={handlesubmit}>
 			 Log in
 		   </Button>
 		  
