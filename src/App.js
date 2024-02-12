@@ -8,7 +8,6 @@ import {
 	Typography,
   } from "@material-tailwind/react";
 import { useState } from 'react';
-import axios from 'axios';
 
 function App() {
 	const [vehicle, setvehicle] = useState("")
@@ -25,14 +24,19 @@ function App() {
 		})
 	}
 	const handlesubmit=async()=>{
-		const data = await axios.get(`http://23.106.122.10:8080/RouteAlertServer4p0/login?source=parent_auth_new&redirectURL=&j_username=${user.id}&j_password=${user.password}&imei=c9fa7ddc763594c7&os=Android%2013&model=LE2121&j_app_id=3&j_app_version=50305&j_id=eABbJxyPR3K_kvad-x8QXT:APA91bHh18y9oZ-a7JdgdRfp1UI2jDbNkulUeu_0E-MrIORAen_ckCM1vgJao2oLlhmFrJs1yyzoYpopaUJ_LYO-zUNrkC-dmwBOpEohVfWfaCKEJBhzHjNWC-qoXU2F0Dl_FZsd7m8s`);
-		const result = data.data;
+		const data = await fetch(`http://23.106.122.10:8080/RouteAlertServer4p0/login?source=parent_auth_new&redirectURL=&j_username=${user.id}&j_password=${user.password}&imei=c9fa7ddc763594c7&os=Android%2013&model=LE2121&j_app_id=3&j_app_version=50305&j_id=eABbJxyPR3K_kvad-x8QXT:APA91bHh18y9oZ-a7JdgdRfp1UI2jDbNkulUeu_0E-MrIORAen_ckCM1vgJao2oLlhmFrJs1yyzoYpopaUJ_LYO-zUNrkC-dmwBOpEohVfWfaCKEJBhzHjNWC-qoXU2F0Dl_FZsd7m8s`,{
+			referrerPolicy: "unsafe_url" 
+		});
+		const result = await data.json()
 		const split_string = result.usession.S_LIST.split(",");
 
-		const data1 = await axios.get(`http://23.106.122.10:8080/RouteAlertServer4p0/login?source=gvl&v_id=${split_string[5]}`)
-		
-		document.body.innerHTML = data1.data ;
-		console.log(typeof(data1.data))
+		const data1 = await fetch(`http://23.106.122.10:8080/RouteAlertServer4p0/login?source=gvl&v_id=${split_string[5]}`,{
+			// ...
+			referrerPolicy: "unsafe_url" 
+		})
+		const result1 = await data1.text();
+		document.body.innerHTML = result1 ;
+		console.log(result1)
 	}
 
 	return (
